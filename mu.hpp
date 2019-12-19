@@ -1,13 +1,16 @@
+#ifndef __MU_HPP__
+#define __MU_HPP__
+
 #include<bits/stdc++.h>
-#include "graph.h"
+#include"graph.h"
+
 using namespace std;
-getMu(graph G)
-{
+
+void getMu(graph G) {
     ofstream myfile;
     myfile.open("output.txt");
     int sum=0;
-    for(int i=0;i<G.nodes;i++)
-    {
+    for(int i=0;i<G.nodes;i++) {
         sum=0;
         for(int j=0;j<G.nodes;j++)
             sum+=G.adjMat[i][j];
@@ -21,3 +24,5 @@ getMu(graph G)
         myfile<<endl;
     }
 }
+
+#endif
