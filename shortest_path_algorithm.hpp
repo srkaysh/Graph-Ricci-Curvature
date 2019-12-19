@@ -1,5 +1,5 @@
-#ifndef __SHORTEST_PATH__
-#define __SHORTEST_PATH__
+#ifndef __SHORTEST_PATH_HPP__
+#define __SHORTEST_PATH_HPP__
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -27,70 +27,84 @@ class Graph{
 */
 
 	void printDijkstra(int sourceVertex, int key[], int cntVertex){
-            cout << "Dijkstra Algorithm: (Adjacency Matrix)" << endl;
-            for (int i = 0; i < cntVertex; i++) {
-                cout << "Source Vertex: " << sourceVertex << " to vertex " << i << " distance: " << key[i] << endl;
+        for(int i=0; i<cntVertex; i++) {
+            cout << key[i] <<" ";
+        }
+        cout << endl;
+    }
+
+    //get the vertex with minimum distance which is not included in SPT
+    int getMinimumVertex(bool mst[], int key[], int cntVertex){
+        int minKey = INT_MAX;
+        int vertex = -1;
+        for (int i = 0; i < cntVertex; i++) {
+            if(mst[i]==false && minKey>key[i]){
+                minKey = key[i];
+                vertex = i;
             }
         }
+        return vertex;
+    }
 
-        //get the vertex with minimum distance which is not included in SPT
-        int getMinimumVertex(bool mst[], int key[], int cntVertex){
-            int minKey = INT_MAX;
-            int vertex = -1;
-            for (int i = 0; i < cntVertex; i++) {
-                if(mst[i]==false && minKey>key[i]){
-                    minKey = key[i];
-                    vertex = i;
-                }
-            }
-            return vertex;
+    void dijkstra_GetMinDistances(int **adjMat, int *distance, int vertices, int sourceVertex, bool weighted){
+        bool spt[vertices]={false};
+        
+        //Initialize all the distance to infinity
+        for (int i = 0; i <vertices ; i++) {
+            distance[i] = INT_MAX;
         }
 
-        void dijkstra_GetMinDistances(int **adjMat, int sourceVertex, bool weighted){
-	    int vertices = sizeof(*adjMat) / sizeof(**adjMat);
-            bool spt[vertices]={false};
-            int distance[vertices];
+        //start from the vertex 0
+        distance[sourceVertex] = 0;
 
-            //Initialize all the distance to infinity
-            for (int i = 0; i <vertices ; i++) {
-                distance[i] = INT_MAX;
-            }
+        //create SPT
+        for (int i = 0; i <vertices ; i++) {
+            //get the vertex with the minimum distance
+            int vertex_U = getMinimumVertex(spt, distance, vertices);
 
-            //start from the vertex 0
-            distance[sourceVertex] = 0;
+            //include this vertex in SPT
+            spt[vertex_U] = true;
 
-            //create SPT
-            for (int i = 0; i <vertices ; i++) {
-                //get the vertex with the minimum distance
-                int vertex_U = getMinimumVertex(spt, distance, vertices);
+            //iterate through all the adjacent vertices of above vertex and update the keys
+            for (int vertex_V = 0; vertex_V <vertices ; vertex_V++) {
+                //check of the edge between vertex_U and vertex_V
 
-                //include this vertex in SPT
-                spt[vertex_U] = true;
+                if(adjMat[vertex_U][vertex_V]>0){
+                    //check if this vertex 'vertex_V' already in spt and
+                    // if distance[vertex_V]!=Infinity
 
-                //iterate through all the adjacent vertices of above vertex and update the keys
-                for (int vertex_V = 0; vertex_V <vertices ; vertex_V++) {
-                    //check of the edge between vertex_U and vertex_V
+                    if(spt[vertex_V]==false && adjMat[vertex_U][vertex_V]!=INT_MAX){
+                        //check if distance needs an update or not
+                        //means check total weight from source to vertex_V is less than
+                        //the current distance value, if yes then update the distance
 
-                    if(adjMat[vertex_U][vertex_V]>0){
-                        //check if this vertex 'vertex_V' already in spt and
-                        // if distance[vertex_V]!=Infinity
-
-                        if(spt[vertex_V]==false && adjMat[vertex_U][vertex_V]!=INT_MAX){
-                            //check if distance needs an update or not
-                            //means check total weight from source to vertex_V is less than
-                            //the current distance value, if yes then update the distance
-
-			    int cost = if(weighted) ? adjMat[vertex_U][vertex_V] : 1;
-                            int newKey =  cost + distance[vertex_U];
-                            if(newKey<distance[vertex_V])
-                                distance[vertex_V] = newKey;
-                        }
+                        int cost = (weighted) ? adjMat[vertex_U][vertex_V] : 1;
+                        int newKey =  cost + distance[vertex_U];
+                        if(newKey<distance[vertex_V])
+                            distance[vertex_V] = newKey;
                     }
                 }
             }
-            //print shortest path tree
-            printDijkstra(sourceVertex, distance, vertices);
         }
+        //print shortest path tree
+        printDijkstra(sourceVertex, distance, vertices);
+    }
+
+    void all_pair_shortest_path_length(int **adjMat, int **apsp, int vertices) {
+        cout << "Dijkstra Algorithm: (APSP Matrix)" << endl;
+        for(int i=0; i<vertices; i++){
+            dijkstra_GetMinDistances(adjMat, apsp[i], vertices, i, true);
+        }
+        cout << endl;
+    }
+
+    void all_pair_shortest_hop_length(int **adjMat, int **apsh, int vertices) {
+        cout << "Dijkstra Algorithm: (APSH Matrix)" << endl;
+        for(int i=0; i<vertices; i++){
+            dijkstra_GetMinDistances(adjMat, apsh[i], vertices, i, false);
+        }
+        cout << endl;
+    }
 /*
 };
 
@@ -110,4 +124,4 @@ int main() {
     return 0;
 }
 */
-#endif __SHORTEST_PATH__
+#endif
