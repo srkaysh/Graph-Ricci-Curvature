@@ -3,10 +3,11 @@
 
 #include<bits/stdc++.h>
 using namespace std;
-
+/*
 class Graph{
     private:
-        int vertices;
+
+	int vertices;
         int **matrix=NULL;
 
     public:
@@ -15,7 +16,7 @@ class Graph{
             vertices = sizeof(*matrix) / sizeof(**matrix);
         }
 
-        /*
+
         void addEdge(int source, int destination, int weight) {
             //add edge
             matrix[source][destination] = weight;
@@ -23,13 +24,20 @@ class Graph{
             //add back edge for undirected graph
             matrix[destination][source] = weight;
         }
-        */
+*/
+
+	void printDijkstra(int sourceVertex, int key[], int cntVertex){
+            cout << "Dijkstra Algorithm: (Adjacency Matrix)" << endl;
+            for (int i = 0; i < cntVertex; i++) {
+                cout << "Source Vertex: " << sourceVertex << " to vertex " << i << " distance: " << key[i] << endl;
+            }
+        }
 
         //get the vertex with minimum distance which is not included in SPT
-        int getMinimumVertex(bool mst[], int key[]){
+        int getMinimumVertex(bool mst[], int key[], int cntVertex){
             int minKey = INT_MAX;
             int vertex = -1;
-            for (int i = 0; i <vertices ; i++) {
+            for (int i = 0; i < cntVertex; i++) {
                 if(mst[i]==false && minKey>key[i]){
                     minKey = key[i];
                     vertex = i;
@@ -38,7 +46,8 @@ class Graph{
             return vertex;
         }
 
-        void dijkstra_GetMinDistances(int sourceVertex){
+        void dijkstra_GetMinDistances(int **adjMat, int sourceVertex, bool weighted){
+	    int vertices = sizeof(*adjMat) / sizeof(**adjMat);
             bool spt[vertices]={false};
             int distance[vertices];
 
@@ -53,7 +62,7 @@ class Graph{
             //create SPT
             for (int i = 0; i <vertices ; i++) {
                 //get the vertex with the minimum distance
-                int vertex_U = getMinimumVertex(spt, distance);
+                int vertex_U = getMinimumVertex(spt, distance, vertices);
 
                 //include this vertex in SPT
                 spt[vertex_U] = true;
@@ -62,16 +71,17 @@ class Graph{
                 for (int vertex_V = 0; vertex_V <vertices ; vertex_V++) {
                     //check of the edge between vertex_U and vertex_V
 
-                    if(matrix[vertex_U][vertex_V]>0){
+                    if(adjMat[vertex_U][vertex_V]>0){
                         //check if this vertex 'vertex_V' already in spt and
                         // if distance[vertex_V]!=Infinity
 
-                        if(spt[vertex_V]==false && matrix[vertex_U][vertex_V]!=INT_MAX){
+                        if(spt[vertex_V]==false && adjMat[vertex_U][vertex_V]!=INT_MAX){
                             //check if distance needs an update or not
                             //means check total weight from source to vertex_V is less than
                             //the current distance value, if yes then update the distance
 
-                            int newKey =  matrix[vertex_U][vertex_V] + distance[vertex_U];
+			    int cost = if(weighted) ? adjMat[vertex_U][vertex_V] : 1;
+                            int newKey =  cost + distance[vertex_U];
                             if(newKey<distance[vertex_V])
                                 distance[vertex_V] = newKey;
                         }
@@ -79,17 +89,11 @@ class Graph{
                 }
             }
             //print shortest path tree
-            printDijkstra(sourceVertex, distance);
+            printDijkstra(sourceVertex, distance, vertices);
         }
-
-        void printDijkstra(int sourceVertex, int key[]){
-            cout << "Dijkstra Algorithm: (Adjacency Matrix)" << endl;
-            for (int i = 0; i <vertices ; i++) {
-                cout << "Source Vertex: " << sourceVertex << " to vertex " << i << " distance: " << key[i] << endl;
-            }
-        }
-};
 /*
+};
+
 int main() {
     int vertices = 6;
     Graph graph(vertices);
