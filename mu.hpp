@@ -2,7 +2,7 @@
 #define __MU_HPP__
 
 #include<bits/stdc++.h>
-#include"graph.h"
+#include"graph.hpp"
 
 using namespace std;
 

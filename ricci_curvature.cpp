@@ -1,5 +1,5 @@
-#include "graph.h"
-#include "mu.h"
+#include "graph.hpp"
+#include "mu.hpp"
 #include "shortest_path_algorithm.hpp"
 
 using namespace std;
@@ -7,7 +7,7 @@ using namespace std;
 int main() {
     int vertices = 8;
     int edges = 12;
-    
+
     graph inputGraph(vertices,edges);
     inputGraph.showGraph();
     cout << endl;
