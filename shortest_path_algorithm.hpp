@@ -94,7 +94,7 @@ class Graph{
     void all_pair_shortest_path_length(graph G) {
         cout << "Dijkstra Algorithm: (APSP Matrix)" << endl;
         ofstream file;
-        file.open("apsp.csv");
+        file.open("Results/apsp.csv");
         for(int i=0; i<G.nodes; i++){
             dijkstra_GetMinDistances(G.adjMat, G.apsp[i], G.nodes, i, true);
             for(int j=0; j<G.nodes; j++) {
@@ -112,7 +112,7 @@ class Graph{
     void all_pair_shortest_hop_length(graph G) {
         cout << "Dijkstra Algorithm: (APSH Matrix)" << endl;
         ofstream file;
-        file.open("apsh.csv");
+        file.open("Results/apsh.csv");
         for(int i=0; i<G.nodes; i++){
             dijkstra_GetMinDistances(G.adjMat, G.apsh[i], G.nodes, i, false);
             for(int j=0; j<G.nodes; j++) {

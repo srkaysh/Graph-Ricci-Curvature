@@ -8,7 +8,7 @@ using namespace std;
 
 void getMu(graph G) {
     ofstream myfile;
-    myfile.open("output.txt");
+    myfile.open("Results/mu.txt");
     int sum=0;
     for(int i=0;i<G.nodes;i++) {
         sum=0;

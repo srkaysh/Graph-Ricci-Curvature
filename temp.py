@@ -3,7 +3,7 @@ import time
 import cvxpy as cvx
 import networkx as nx
 import numpy as np
-f=open("output.txt", "r")
+f=open("Results/mu.txt", "r")
 if f.mode == 'r':
 	contents =f.read()
 contentArray=contents.split('\n')
@@ -14,17 +14,17 @@ for i in contentArray:
 
 for i in range(len(mu)) :
 	for j in range(len(mu[i])):
-		mu[i][j]=float(mu[i][j]);
+		mu[i][j]=float(mu[i][j])
 for i in range(len(mu)):
 	for j in range(len(mu[i])):
 		if(mu[i][j]!=0):
-			mux=mu[i];
-			muy=mu[j];
+			mux=mu[i]
+			muy=mu[j]
 			a1=[]
 			a2=[]
 			for k in range(len(mux)):
 				if(mux[k]!=0):
-					a1.append(k);
+					a1.append(k)
 			for k in range(len(muy)):
 				if(muy[k]!=0):
 					a2.append(k)

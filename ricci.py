@@ -34,11 +34,11 @@ print("number of edges", nx.number_of_edges(G))
 G = nx.to_undirected(G)
 '''
 
-A = np.loadtxt(open("temp_adjMat.csv", "rb"), delimiter=",")
+A = np.loadtxt(open("Results/temp_adjMat.csv", "rb"), delimiter=",")
 G = nx.from_numpy_matrix(A)
 G.edges(data=True)
 nx.draw_networkx(G, pos = None, with_labels=True, font_weight='bold')
-plt.savefig("inputGraph.png")
+plt.savefig("Results/inputGraph.png")
 
 EPSILON = 1e-7  # to prevent divided by zero
 weight=None; edge_list=None; method="OTD"; verbose=False
@@ -130,15 +130,15 @@ if method == 'OTD':    #optimal transport distance
         m = prob.solve(solver="ECOS_BB")  # change solver here if you want
         result = 1 - (m / hop_dist_val[source_val][target_val])  # divided by the length of d(i, j)
         scalar = scalar + result
-        file1 = open("Ricci_Curvature.txt","a") 
+        file1 = open("Results/Ricci_Curvature.txt","a") 
         string_to_write = "source: " + str(source_val) + ", target: " + str(target_val) + ", Olivier-Ricci curvature: " + str(result) + "\n"
         file1.write(str(string_to_write))
         file1.close() 
-file1 = open("Ricci_Curvature.txt","a")
+file1 = open("Results/Ricci_Curvature.txt","a")
 file1.write("The scalar curvature is: " + str(scalar) + "\n")
 file1.close()
 
 A = nx.adjacency_matrix(G)
-file1 = open("inputGraph.txt","w") 
+file1 = open("Results/inputGraph.txt","w") 
 file1.write(str(A.todense())) 
 file1.close() #to change file access modes 

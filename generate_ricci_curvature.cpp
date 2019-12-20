@@ -6,7 +6,7 @@ using namespace std;
 
 void visualiseGraph(graph G) {
     ofstream file;
-    file.open("Results/temp_adjMat.csv");
+    file.open("temp_adjMat.csv");
     for(int i=0; i<G.nodes; i++) {
         for(int j=0; j<G.nodes; j++) {
             if(j==G.nodes-1)
