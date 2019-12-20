@@ -4,7 +4,9 @@ import time
 import cvxpy as cvx
 import networkx as nx
 import numpy as np
+import matplotlib.pyplot as plt
 
+'''
 G = nx.DiGraph()
 #G.add_edges_from([(1, 2), (2, 3), (3, 4), (2, 4), (4, 2), (1, 5), (5, 4)])
 i=1
@@ -30,7 +32,13 @@ print("number of nodes", nx.number_of_nodes(G))
 print("number of edges", nx.number_of_edges(G))
 
 G = nx.to_undirected(G)
+'''
+
+A = np.loadtxt(open("temp_adjMat.csv", "rb"), delimiter=",")
+G = nx.from_numpy_matrix(A)
+G.edges(data=True)
 nx.draw_networkx(G, pos = None, with_labels=True, font_weight='bold')
+plt.savefig("inputGraph.png")
 
 EPSILON = 1e-7  # to prevent divided by zero
 weight=None; edge_list=None; method="OTD"; verbose=False
@@ -51,6 +59,8 @@ args = [(G, source, target, length, hop_distance, verbose, method) for source, t
 args
 
 scalar = 0
+file1 = open("Ricci_Curvature.txt","w")
+file1.close()
 if method == 'OTD':    #optimal transport distance
     for arg in args:
         print('The method starts here')
@@ -120,14 +130,15 @@ if method == 'OTD':    #optimal transport distance
         m = prob.solve(solver="ECOS_BB")  # change solver here if you want
         result = 1 - (m / hop_dist_val[source_val][target_val])  # divided by the length of d(i, j)
         scalar = scalar + result
-        file1 = open("myfile1.txt","a") 
-        string_to_write = "source: ", source_val, "target: ", target_val, "Olivier-Ricci curvature: ", result, "\n"
+        file1 = open("Ricci_Curvature.txt","a") 
+        string_to_write = "source: " + str(source_val) + ", target: " + str(target_val) + ", Olivier-Ricci curvature: " + str(result) + "\n"
         file1.write(str(string_to_write))
         file1.close() 
-print(scalar)
-print("The scalar curvature is: ", scalar)
+file1 = open("Ricci_Curvature.txt","a")
+file1.write("The scalar curvature is: " + str(scalar) + "\n")
+file1.close()
 
 A = nx.adjacency_matrix(G)
-file1 = open("myfile.txt","w") 
+file1 = open("inputGraph.txt","w") 
 file1.write(str(A.todense())) 
 file1.close() #to change file access modes 

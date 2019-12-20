@@ -6,7 +6,7 @@ using namespace std;
 
 void visualiseGraph(graph G) {
     ofstream file;
-    file.open("adjMat.csv");
+    file.open("temp_adjMat.csv");
     for(int i=0; i<G.nodes; i++) {
         for(int j=0; j<G.nodes; j++) {
             if(j==G.nodes-1)
@@ -17,7 +17,7 @@ void visualiseGraph(graph G) {
         file << endl;
     }
     file.close();
-    system("python visualise_graph.py");
+    system("python ricci.py");
 }
 
 int main() {
