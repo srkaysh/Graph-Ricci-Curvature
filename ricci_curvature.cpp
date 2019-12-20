@@ -4,10 +4,9 @@
 
 using namespace std;
 
-/*
-void visualiseGraph(graph G, char *fName) {
+void visualiseGraph(graph G) {
     ofstream file;
-    file.open(fName + ".txt");
+    file.open("adjMat.csv");
     for(int i=0; i<G.nodes; i++) {
         for(int j=0; j<G.nodes; j++) {
             if(j==G.nodes-1)
@@ -18,8 +17,8 @@ void visualiseGraph(graph G, char *fName) {
         file << endl;
     }
     file.close();
+    system("python visualise_graph.py");
 }
-*/
 
 int main() {
     int vertices = 8;
@@ -30,6 +29,7 @@ int main() {
     cout << endl;
     all_pair_shortest_path_length(inputGraph);
     all_pair_shortest_hop_length(inputGraph);
+    visualiseGraph(inputGraph);
 
     for(int i=0; i<inputGraph.nodes; i++){
         delete[] inputGraph.adjMat[i];
