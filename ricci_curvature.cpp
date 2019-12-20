@@ -4,6 +4,7 @@
 
 using namespace std;
 
+/*
 void visualiseGraph(graph G, char *fName) {
     ofstream file;
     file.open(fName + ".txt");
@@ -18,8 +19,7 @@ void visualiseGraph(graph G, char *fName) {
     }
     file.close();
 }
-
-void 
+*/
 
 int main() {
     int vertices = 8;

@@ -2,7 +2,7 @@
 #define __SHORTEST_PATH_HPP__
 
 #include <bits/stdc++.h>
-#include <graph.hpp>
+#include "graph.hpp"
 using namespace std;
 /*
 class Graph{
@@ -113,7 +113,7 @@ class Graph{
         cout << "Dijkstra Algorithm: (APSH Matrix)" << endl;
         ofstream file;
         file.open("apsh.csv");
-        for(int i=0; i<vertices; i++){
+        for(int i=0; i<G.nodes; i++){
             dijkstra_GetMinDistances(G.adjMat, G.apsh[i], G.nodes, i, false);
             for(int j=0; j<G.nodes; j++) {
                 if(j==G.nodes-1)

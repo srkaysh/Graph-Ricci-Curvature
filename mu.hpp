@@ -1,8 +1,8 @@
 #ifndef __MU_HPP__
 #define __MU_HPP__
 
-#include<bits/stdc++.h>
-#include"graph.hpp"
+#include <bits/stdc++.h>
+#include "graph.hpp"
 
 using namespace std;
 
