@@ -59,7 +59,7 @@ args = [(G, source, target, length, hop_distance, verbose, method) for source, t
 args
 
 scalar = 0
-file1 = open("Ricci_Curvature.txt","w")
+file1 = open("Results/Ricci_Curvature.txt","w")
 file1.close()
 if method == 'OTD':    #optimal transport distance
     for arg in args:

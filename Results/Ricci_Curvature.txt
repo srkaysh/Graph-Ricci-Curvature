@@ -11,3 +11,16 @@ source: 3, target: 6, Olivier-Ricci curvature: 0.23958333330425508
 source: 4, target: 5, Olivier-Ricci curvature: 0.26510988913964584
 source: 4, target: 6, Olivier-Ricci curvature: -1.4358974359231937
 The scalar curvature is: -6.339022941998916
+source: 0, target: 2, Olivier-Ricci curvature: -0.05194805254049806
+source: 0, target: 4, Olivier-Ricci curvature: 0.11111111040331301
+source: 1, target: 3, Olivier-Ricci curvature: -0.22222222222455246
+source: 1, target: 6, Olivier-Ricci curvature: 0.01830065358893207
+source: 2, target: 4, Olivier-Ricci curvature: 0.34570191626964075
+source: 2, target: 7, Olivier-Ricci curvature: 0.35083435052946343
+source: 3, target: 4, Olivier-Ricci curvature: 0.19949494929919986
+source: 3, target: 5, Olivier-Ricci curvature: -2.7500000015135133
+source: 3, target: 6, Olivier-Ricci curvature: -0.8627450980370901
+source: 4, target: 5, Olivier-Ricci curvature: 0.15909090848328322
+source: 4, target: 6, Olivier-Ricci curvature: 0.2806213393822743
+source: 6, target: 7, Olivier-Ricci curvature: -0.7680995476127617
+The scalar curvature is: -3.189859693972309
