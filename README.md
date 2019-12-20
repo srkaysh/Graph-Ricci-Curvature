@@ -5,7 +5,7 @@ How to run the project:
 1. Compile the ricci curvature.cpp
 2. Execute the executable
 
-Input:
+Input:</br>
 We are generating random graphs and taking the random graph as input. The adjacency matrix for the graph can be seen in inputGraph.txt. And the input graph has been visualized in inputGraph.png
 
 Intermediary:
