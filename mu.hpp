@@ -23,6 +23,7 @@ void getMu(graph G) {
         }
         myfile<<endl;
     }
+    myfile.close();
 }
 
 #endif

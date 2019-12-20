@@ -1,7 +1,8 @@
 #ifndef __SHORTEST_PATH_HPP__
 #define __SHORTEST_PATH_HPP__
 
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
+#include <graph.hpp>
 using namespace std;
 /*
 class Graph{
@@ -87,22 +88,42 @@ class Graph{
             }
         }
         //print shortest path tree
-        printDijkstra(sourceVertex, distance, vertices);
+        //printDijkstra(sourceVertex, distance, vertices);
     }
 
-    void all_pair_shortest_path_length(int **adjMat, int **apsp, int vertices) {
+    void all_pair_shortest_path_length(graph G) {
         cout << "Dijkstra Algorithm: (APSP Matrix)" << endl;
-        for(int i=0; i<vertices; i++){
-            dijkstra_GetMinDistances(adjMat, apsp[i], vertices, i, true);
+        ofstream file;
+        file.open("apsp.csv");
+        for(int i=0; i<G.nodes; i++){
+            dijkstra_GetMinDistances(G.adjMat, G.apsp[i], G.nodes, i, true);
+            for(int j=0; j<G.nodes; j++) {
+                if(j==G.nodes-1)
+                    file << G.apsp[i][j];
+                else
+                    file << G.apsp[i][j] << ",";
+            }
+            file << endl;
         }
+        file.close();
         cout << endl;
     }
 
-    void all_pair_shortest_hop_length(int **adjMat, int **apsh, int vertices) {
+    void all_pair_shortest_hop_length(graph G) {
         cout << "Dijkstra Algorithm: (APSH Matrix)" << endl;
+        ofstream file;
+        file.open("apsh.csv");
         for(int i=0; i<vertices; i++){
-            dijkstra_GetMinDistances(adjMat, apsh[i], vertices, i, false);
+            dijkstra_GetMinDistances(G.adjMat, G.apsh[i], G.nodes, i, false);
+            for(int j=0; j<G.nodes; j++) {
+                if(j==G.nodes-1)
+                    file << G.apsh[i][j];
+                else
+                    file << G.apsh[i][j] << ",";
+            }
+            file << endl;
         }
+        file.close();
         cout << endl;
     }
 /*
