@@ -50,7 +50,7 @@ print(edge_list)
 args = [(G, source, target, length, hop_distance, verbose, method) for source, target in edge_list]
 args
 
-ric = 0
+scalar = 0
 if method == 'OTD':    #optimal transport distance
     for arg in args:
         print('The method starts here')
@@ -118,10 +118,16 @@ if method == 'OTD':    #optimal transport distance
         prob = cvx.Problem(obj, constrains)
         # solve for optimal transportation cost
         m = prob.solve(solver="ECOS_BB")  # change solver here if you want
-        
-        
         result = 1 - (m / hop_dist_val[source_val][target_val])  # divided by the length of d(i, j)
-        ric = ric + result
-        print(source_val, target_val, "Olivier-Ricci curvature: ", result)
-        print(m , hop_dist_val[source_val][target_val])
-print(ric)
+        scalar = scalar + result
+        file1 = open("myfile1.txt","a") 
+        string_to_write = "source: ", source_val, "target: ", target_val, "Olivier-Ricci curvature: ", result, "\n"
+        file1.write(str(string_to_write))
+        file1.close() 
+print(scalar)
+print("The scalar curvature is: ", scalar)
+
+A = nx.adjacency_matrix(G)
+file1 = open("myfile.txt","w") 
+file1.write(str(A.todense())) 
+file1.close() #to change file access modes 
