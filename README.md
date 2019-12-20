@@ -9,7 +9,7 @@ Input:
 We are generating random graphs and taking the random graph as input. The adjacency matrix for the graph can be seen in inputGraph.txt. And the input graph has been visualized in inputGraph.png
 
 Intermediary:
-The all pair shortest path for the shortest graph is stored in apsp. And the hop distance is stored in apsh. 
+The all pair shortest path for the shortest graph is stored in apsp.csv. And the hop distance is stored in apsh.csv. 
 
 Output:
 The Ricci curvature at each node is stored in Ricci_Curvature.txt along with the scalar curvature of the entire graph. 
